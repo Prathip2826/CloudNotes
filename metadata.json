@@ -1,0 +1,6 @@
+{
+  "name": "CloudNotes",
+  "description": "Cloud-Based Smart Note-Taking Application with real-time synchronization, rich markdown editing, tags, archiving, favorites, and secure link sharing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

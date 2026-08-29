@@ -1,0 +1,91 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile information stored at users/{uid}",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "User's full display name",
+          "maxLength": 100
+        },
+        "email": {
+          "type": "string",
+          "description": "User's email address",
+          "maxLength": 150
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "Avatar image URL",
+          "maxLength": 500
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Account creation timestamp"
+        }
+      },
+      "required": ["email", "createdAt"]
+    },
+    "Note": {
+      "title": "Note",
+      "description": "A single note document stored at users/{uid}/notes/{noteId}",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the note",
+          "maxLength": 300
+        },
+        "body": {
+          "type": "string",
+          "description": "Markdown body content of the note",
+          "maxLength": 100000
+        },
+        "tags": {
+          "type": "array",
+          "description": "Array of tag strings assigned to the note"
+        },
+        "favorite": {
+          "type": "boolean",
+          "description": "Whether the note is marked as favorite"
+        },
+        "archived": {
+          "type": "boolean",
+          "description": "Whether the note is archived"
+        },
+        "shared": {
+          "type": "boolean",
+          "description": "Whether public link sharing is enabled"
+        },
+        "shareExpiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the shared link expires (null if indefinitely shared)"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when note was created"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when note was last updated"
+        }
+      },
+      "required": ["title", "body", "favorite", "archived", "shared", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile collection storing individual user account metadata"
+    },
+    "/users/{userId}/notes/{noteId}": {
+      "schema": "Note",
+      "description": "Subcollection containing all private and shared notes for a specific user"
+    }
+  }
+}
